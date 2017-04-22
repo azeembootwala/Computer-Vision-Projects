@@ -1,0 +1,22 @@
+The Aim of this project was to detect the volume of the box using depth images with kinect .
+1.The procedure is to find the most dominant plane in the image ( A plane which holds the most number of points in the point cloud ) in this case the Table plane. 
+WE then mask this plane and then find the next dominant plane ( here the top contour of the box ).
+2. After finding the two planes we now compute the height of the box and by edge detection find the length & breath to finally compute the box volume. 
+
+
+The three files for this project are mean/median , Mask and RANSAC . 
+
+
+Mean/ Median :- The Function Mean/ Median runs a mean or a median filter on the image to remove the noise and make the values depth values smooth and suppress any random intensities. 
+
+Once the image is mean/ median filtered. 
+
+RANSAC :- Subtracting single distance measurements from each other to calculate the height of the box is sensitive
+to noise. A better approach consists of finding two planes that approximate the floor and the top of
+the box and calculate the distance between the planes. A simple solution to finding dominant planes in
+a point cloud is to use RANSAC to find the plane models with the most inliers, in our example the
+floor and the top of the box.
+
+Mask :-We then Use morphological operators to improve the quality of the floor mask resulting mask to find all pixels/3D points that do not belong the floor (e.g. the
+box, background objects, noise, . . . )
+
